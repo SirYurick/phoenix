@@ -1,0 +1,47 @@
+{% extends 'phoenix/base.html' %}
+
+{% load static %}
+
+{% block body_block %}
+
+<div class="row"> <!-- class="p-3 mb-2 bg-light text-dark" -->
+  <h1 class="pl-3 pt-2">Студия дизайна</h1>
+  <p class="pl-3 pr-3 pb-2">Создаём коллажи из фотографий, фотокниги,
+    фотоальбомы, именные адресные поздравления,
+    видеопоздравления, фото-видео-отчёты, оригинальные видео-слайдшоу под музыку,
+    открытки, плакаты, баннеры и прочую полиграфическую продукцию в&nbsp;элетронном или печатном виде.
+  </p>
+</div>
+
+<!--
+{% include 'phoenix/thumbnail.html' with pages=pages product_list=product_list %}
+{% include 'phoenix/one_image_preview.html' with cat_list=cat_list %}
+{% include 'phoenix/video.html' %}
+  <a data-fancybox="gallery" href="https://www.youtube.com/watch?v=p3BvmxJ4kxQ?enablejsapi=1&theme=light&showinfo=0&vq=hd720&border=0&autoplay=1">
+      <img class="img-fluid mx-auto-d-block img-thumbnail img-rounded" src="{% static 'phoenix_logo_small.png' %}" alt="" width=300>
+  </a>
+-->
+<div class="row">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+    <button class="btn btn-outline-primary btn-sm" data-fancybox-trigger="gallery">Смотреть все фото</button>
+
+      <div id="gallery" style="display: none;">
+        {% for product in product_list %}
+        {% if not product.link %}
+        <a href="{{ product.image.url }}" data-fancybox="gallery"></a>
+        {% endif %}
+
+        {% if product.multipage %}
+        {% for page in product.pages %}
+        <a href="{{ page.image.url }}" data-fancybox="gallery"></a>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+      </div>
+      <a class="btn btn-outline-primary btn-sm" href="/phoenix/category/Video_Present/" role="button">Смотреть все видео</a>
+  </div>
+</div>
+
+{% include 'phoenix/gallery.html' with cat_list=cat_list %}
+
+{% endblock %}

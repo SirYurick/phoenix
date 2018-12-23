@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset='utf-8'>
+
+<head>
+  <link href="{% static 'css/bootstrap-fluid-adj.css' %}" rel="stylesheet">
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+  <link href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet">
+  <link href="{% static 'css/jquery.fancybox.min.css' %}" rel="stylesheet">
+
+  {% block head_block %}{% endblock %}
+  <title>Студия дизайна - {% block title %}Феникс{% endblock %}</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    	<a class="navbar-brand" href="/phoenix/"><img src="{% static 'phoenix_logo_small_bw.png' %}" width="40" class="d-inline-block align-top" alt="Phoenix"></a>
+    	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
+      	<span class="navbar-toggler-icon"></span>
+    	</button>
+
+    	<div class="collapse navbar-collapse" id="navbar1">
+      	<ul class="navbar-nav mr-auto">
+        		<li class="nav-item active">
+          		<a class="nav-link" href="/phoenix/">Главная<span class="sr-only">Все фото</span></a>
+        		</li>
+
+        		<li class="nav-item dropdown">
+          		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Категории</a>
+          		<div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                {% for cat in cat_list %}
+            			<a class="dropdown-item" href="/phoenix/category/{{ cat.url }}">{{ cat.title }}</a>
+                {% endfor %}
+                <!--
+            			<div class="dropdown-divider"></div>
+            			<a class="dropdown-item" href="#">Что-нибудь ещё</a>
+                -->
+          		</div>
+        		</li>
+
+            <li class="nav-item">
+    		    	<a class="nav-link" href="/phoenix/how_to_buy/">Заказать</a>
+    		    </li>
+      	</ul>
+        {% if user.is_authenticated %}
+        <a href="/phoenix/profile/" class="nav-link text-light">{{ user.username }}</a>
+
+        <!--
+          <span class="badge bg-white text-dark"><b id="score"> {{ user.userprofile.score }}</b></span>
+        </a>
+        {% if user.userprofile.bonus %}
+          <b id="bonus"><button class="btn btn-outline-light" type="button">
+            <span class="badge bg-light text-dark">
+              +{{ user.userprofile.bonus }}
+            </span> Забрать
+          </button></b>
+        {% endif %}
+        -->
+        <a href="/phoenix/logout/"><button class="btn btn-outline-secondary">Выйти</button></a>
+        </p>
+        {% else %}
+        <a class="nav-link text-light" href="/phoenix/register/">Зарегистрироваться</a>
+        <a href="/phoenix/login/"><button class="btn btn-outline-light">Войти</button></a>
+        {% endif %}
+        <!--
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+          <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Искать</button>
+        </form>
+        -->
+    	</div>
+  </nav>
+
+  <!-- Ornament for padding, hiding by small menu. -->
+  <div class="row-fluid pb-2 pt-2">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 text-center">
+      <img src="{% static 'phoenix_ornament_1.png' %}" alt="ornament1" class="img-fluid pb-2 pt-2" width=150 />
+    </div>
+  </div>
+  <!-- /Ornament -->
+
+  <div class="container">
+  {% block body_block %}
+  {% endblock %}
+  </div>
+
+  <hr>
+  <footer>
+    <div class="container">
+      <p>
+        <!--
+        <img src="{% static 'phoenix_logo_small.png' %}" alt='Phoenix' width='25'/>&nbsp;
+        -->
+        Студия дизайна в Санкт-Петербурге.
+      </p>
+    </div>
+  </footer>
+
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
+  <script src="{% static 'js/phoenix-ajax.js' %}"></script>
+</body>
+</html>

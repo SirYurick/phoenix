@@ -1,0 +1,15 @@
+{% load static %}
+
+<div style="display: none;">
+
+<a href="{{ product.image.url }}" data-fancybox="images-single">
+ <img src="{{ product.cover.url }}" />
+</a>
+
+{% for page in product.pages %}
+ <a href="{{ page.image.url }}" data-fancybox="images-single"
+    data-thumb="{{ page.image.url }}">
+  </a>
+{% endfor %}
+
+</div>

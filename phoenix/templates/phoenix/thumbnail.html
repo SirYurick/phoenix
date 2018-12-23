@@ -1,0 +1,23 @@
+<div class="container">
+<div class="row">
+  {% for page in page_list %}
+  <div class="col-lg-3 col-md-4 col-6 thumb">
+
+    <a data-fancybox="gallery" href="{{ page.image.url }}">
+        <img class="img-fluid mx-auto-d-block img-thumbnail img-rounded" src="{{ page.image.url }}" alt="" width=300>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+<hr>
+<div class="row">
+  {% for product in product_list  %}
+  <div class="col-lg-3 col-md-4 col-6 thumb">
+
+    <a data-fancybox="gallery" href="{{ product.image.url }}">
+        <img class="img-fluid mx-auto-d-block img-thumbnail img-rounded" src="{{ product.cover.url }}" alt="" width=300>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+</div>

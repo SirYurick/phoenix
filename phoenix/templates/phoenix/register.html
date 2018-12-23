@@ -1,0 +1,36 @@
+{% extends 'phoenix/base.html' %}
+
+{% block body_block %}
+<div class="row justify-content-center">
+
+    {% if registered %}
+    <p>Спасибо за регистрацию!</p>
+    <p>Теперь Вы можете <a href="/phoenix/login/">войти в студию</a></p>
+    <p>Или <a href="/phoenix/">остаться стоять у входа</a></p>
+    {% else %}
+    <form class="form-signin col-xl-4 col-lg-4 col-md-5 col-sm-7 col-9 bg-light text-dark" id="user_form" method="post" action="/phoenix/register/" enctype="multipart/form-data">
+      {% csrf_token %}
+      <h1 class="form-signin-heading text-center">Регистрация</h1>
+      <!-- Display each form. The as_p method wraps each element in a paragraph (<p>) element.
+      This ensures each element appears on a new line, making everything look neater.
+      {{ user_form.as_p }}
+      {{ profile_form.as_p }}-->
+      {% for field in user_form.visible_fields %}
+      {{ field.errors }}
+      {{ field.help_text }}<br />
+      {{ field }}<br />
+      {% endfor %}
+
+      {% for field in profile_form %}
+      {{ filed.errors }}
+      {{ field.help_text }}<br />
+      {{ field }}<br />
+      {% endfor %}
+      <p class="text-center pt-4">
+      <input class="btn btn-primary" type="submit" name="submit" value="Зарегистрироваться" />
+      </p>
+    </form>
+    {% endif %}
+
+</div>
+{% endblock %}

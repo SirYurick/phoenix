@@ -1,0 +1,52 @@
+{% extends 'phoenix/base.html' %}
+{% load static %}
+
+{% block body_block %}
+<h1 class="text-left">{{ current_cat.title }}</h1>
+<hr/>
+{% if product_list %}
+
+{% for product in product_list %}
+{% if product.multipage %}
+{% if product.pages %}
+<div class="row">
+<div class="col-lg-2 col-md-6 col-sm-6 col-12">
+  <h6 class="pt-3 text-dark"> {{ product.title }} </h6>
+<a href="{{ product.image.url }}" data-fancybox="images-single">
+ <img src="{{ product.cover.url }}"  alt='' class="shadow-sm pt-1 pb-1 pl-1 pr-1 img-fluid mx-auto-d-block img-thumbnail" title="{{ product.title }}" width=300 />
+</a>
+
+<div style="display: none;">
+{% for page in product.pages %}
+ <a href="{{ page.image.url }}" data-fancybox="images-single"
+    data-thumb="{{ page.image.url }}"></a>
+{% endfor %}
+</div>
+</div>
+
+</div> 
+{% endif %}
+{% else %}
+{% if product.link %}
+<a data-fancybox="gallery" href="{{ product.link }}" title-fancybox="{{ product.title }}">
+  <img class="img-responsive pt-1 pl-1 pb-1 pr-1" title="{{ product.title }}" src="{{ product.cover.url }}" alt="" width=100 />
+</a>
+{% else %}
+<a data-fancybox="gallery" href="{{ product.image.url }}" title-fancybox="{{ product.title }}">
+  <img class="img-responsive pt-1 pl-1 pb-1 pr-1" title="{{ product.title }}" src="{{ product.cover.url }}" alt="" width=100 />
+</a>
+{% endif %}
+{% endif %}
+{% endfor %}
+{% else %}
+
+<p class="text-muted">Заказчики не дали разрешения на размещение сделанной для них продукции.</p>
+<a href="/phoenix/">
+  <button class="btn btn-outline-secondary">На главную</button>
+</a>
+<!--
+<a data-fancybox data-src="/media/catalog_2019.pdf" href="javascript:;" title-fancybox="111"> PDF</a>
+-->
+{% endif %}
+
+{% endblock %}

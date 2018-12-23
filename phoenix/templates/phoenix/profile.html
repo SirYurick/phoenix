@@ -1,0 +1,21 @@
+{% extends 'phoenix/base.html' %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block body_block %}
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+    <h1 class="text-dark">{{ user.username }}</h1>
+    {% if user.userprofile.picture %}
+    <p><img class="img-responsive img-rounded-circle" src="{{ user.userprofile.picture.url }}" width=100 /></p>
+    {% endif %}
+    <p class="text-dark">{{ user.email }}</p>
+    {% if user.userprofile.website %}
+    <p>Сайт: <a href="{{ user.userprofile.website }}">{{ user.userprofile.website }}</a></p>
+    {% endif %}
+    <!--
+    <p class="text-success">Бонусные баллы: {{ user.userprofile.score }}</p>
+    -->
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'phoenix/base.html' %}
+
+{% block body_block %}
+<div class="row justify-content-center">
+    <form class="form-signin col-xl-4 col-lg-4 col-md-5 col-sm-7 col-9 bg-light text-center" id="login_form" method="post" action="/phoenix/login/">
+      <h2 class="form-signin-heading">Представтесь:</h2>
+      {% csrf_token %}
+      {% if bad_details %}
+      <p><strong>Имя пользователя или пароль некорректны.</strong></p>
+      {% elif disabled_account %}
+      <p><strong>Ваш аккаунт деактивирован.</strong></p>
+      {% endif %}
+      <p><input type="text" class="input-block-level" placeholder="Ваше Имя" name="username" value="" size="50" /></p>
+      <p><input type="password" class="input-block-level" placeholder="Ваш пароль" name="password" value="" size="50" /></p>
+      <p><button class="btn btn-outline-primary" type="submit">Войти в студию</button></p>
+    </form>
+</div>
+{% endblock %}

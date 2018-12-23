@@ -1,0 +1,9 @@
+<ul class="nav nav-list">
+  {% if cat_list %}
+  {% for cat in cat_list %}
+  <li><a href="/phoenix/{{ cat.url }}">{{ cat.title }}</a></li>
+  {% endfor %}
+  {% else %}
+  <li>Категорий нет.</li>
+  {% endif %}
+</ul>

@@ -1,0 +1,19 @@
+{% for cat in cat_list %}
+<hr>
+  <div class="row">
+    <div class="col-lg-2 col-md-6 col-12 thumb">
+      <a href="category/{{ cat.url }}">
+        <button class="btn btn-light">
+          <img class="img-fluid mx-auto-d-block" src="{{ cat.cover.url }}" alt="" width=300 />
+        </button>
+      </a>
+    </div>
+
+    <div class="col-lg-10 col-md-6 col-12">
+      <h5 class="pt-2">{{ cat.title }}</h5>
+      <p class="text-dark"><small>{{ cat.description }}</small></p>
+    </div>
+    <div class="w-100"></div> <!-- end line -->
+  </div>
+
+{% endfor %}
